@@ -112,6 +112,8 @@ while queue:
             parser.feed(text)
             for link in parser.links:
                 enqueue(link, url)
+            for link in re.findall(r"url\((?:['\"])?(/[^)'\"]+)", text):
+                enqueue(link, url)
         data = rewrite(text).encode("utf-8")
     with open(target, "wb") as handle:
         handle.write(data)

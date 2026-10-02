@@ -47,9 +47,11 @@ English lives at the root. French, German, and Japanese use the same paths under
 
 Settlement of a sculpture is by proforma invoice and the emporium’s own payment link or bank transfer. The site does not collect card numbers.
 
-## Photographs (stage 2)
+## Photographs
 
-Engraved plates stand in until archive files are added. Drop a `.jpg`, `.jpeg`, `.png`, `.webp`, or `.avif` on the matching slot and the page uses it. No code change.
+Studio plates are already in `wwwroot/media/` so the published site shows stone, the yard, and the works. They are original studies for the site, not archive photographs of the installed sculptures. Drop a `.jpg`, `.jpeg`, `.png`, `.webp`, or `.avif` on the same slot and the page uses the new file. No code change.
+
+`wwwroot/media/portraits/guru.jpg` is an atelier study of hands at the stone. A portrait from the archive replaces it when you put a file on that path.
 
 | File | Where it appears |
 | --- | --- |

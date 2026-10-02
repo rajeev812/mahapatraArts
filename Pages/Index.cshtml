@@ -67,7 +67,8 @@
             @if (portrait is not null)
             {
                 <figure class="portrait glass">
-                    <img src="@portrait" alt="@Site.T("bio.title")" />
+                    <img src="@portrait" alt="@Site.T("portrait.alt")" />
+                    <figcaption>@Site.T("portrait.caption")</figcaption>
                 </figure>
             }
             else

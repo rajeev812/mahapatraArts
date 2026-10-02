@@ -17,7 +17,8 @@
         <aside class="infobox glass">
             @if (portrait is not null)
             {
-                <img class="infobox-photo" src="@portrait" alt="@Site.T("bio.title")" />
+                <img class="infobox-photo" src="@portrait" alt="@Site.T("portrait.alt")" />
+                <p class="note">@Site.T("portrait.caption")</p>
             }
             else
             {

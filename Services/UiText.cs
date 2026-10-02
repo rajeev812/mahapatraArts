@@ -292,6 +292,18 @@ public static class UiText
             "Guru Ramakanta Mahapatra",
             "グル・ラマカンタ・マハパトラ"
         ],
+        ["portrait.alt"] = [
+            "Carving sandstone in the Puri atelier",
+            "Taille du grès dans l’atelier de Puri",
+            "Sandsteinarbeit im Atelier in Puri",
+            "プリーの工房で砂岩を刻む"
+        ],
+        ["portrait.caption"] = [
+            "Atelier study. An archive portrait replaces this plate when it is added.",
+            "Étude d’atelier. Un portrait d’archive remplace cette planche dès qu’il est ajouté.",
+            "Atelierstudie. Ein Archivporträt ersetzt diese Tafel, sobald es vorliegt.",
+            "工房の習作。記録写真の肖像が加わると、この図版と入れ替わります。"
+        ],
         ["bio.lede"] = [
             "Indian stone sculptor, temple architect, master craftsman and teacher. National Awardee for Master Craftsperson (2005). Known for temple carving, sacred images, and multi-coloured stone patchwork. Founder of Mahapatra Handicrafts Emporium.",
             "Sculpteur indien sur pierre, architecte de temple, maître artisan et professeur. Lauréat national du maître artisan (2005). Connu pour la taille de temple, les images sacrées et le patchwork de pierres multicolores. Fondateur du Mahapatra Handicrafts Emporium.",
