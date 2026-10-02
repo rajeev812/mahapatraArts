@@ -9,10 +9,10 @@ public sealed class SiteOptions
     public string Phone { get; set; } = "";
     public string Email { get; set; } = "";
     public string WhatsApp { get; set; } = "";
-    public string Address { get; set; } = "Kharakhia Baidyanath Lane, Plot No. 1359, Old Town, Bhubaneswar, Odisha 751002, India";
+    public string Address { get; set; } = "Nuagaon, Gangotri Nagar, Bhubaneswar, Odisha 751002, India";
     public string PaymentUrl { get; set; } = "";
-    public double MapLat { get; set; } = 20.2961;
-    public double MapLng { get; set; } = 85.8245;
+    public double MapLat { get; set; } = 20.2246;
+    public double MapLng { get; set; } = 85.8439;
 }
 
 public sealed class SiteView
@@ -145,7 +145,7 @@ public sealed class SiteView
                     ["worksFor"] = new Dictionary<string, object?>
                     {
                         ["@type"] = "Organization",
-                        ["name"] = "Mahapatra Handicrafts Emporium",
+                        ["name"] = "Mahapatra Handicrafts Emporium (A unit of P.R. Exports)",
                         ["address"] = Options.Address
                     }
                 },

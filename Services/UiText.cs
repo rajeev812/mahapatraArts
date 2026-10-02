@@ -208,10 +208,10 @@ public static class UiText
         ],
         ["home.donate.cta"] = ["Support the heritage", "Soutenir le patrimoine", "Das Erbe stützen", "遺産を支える"],
         ["footer.colophon"] = [
-            "Mahapatra Handicrafts Emporium, Bhubaneswar, Odisha. Stone sculpture, temple architecture, and the Guru-Shishya academy.",
-            "Mahapatra Handicrafts Emporium, Bhubaneswar, Odisha. Sculpture sur pierre, architecture de temple et académie Guru-Shishya.",
-            "Mahapatra Handicrafts Emporium, Bhubaneswar, Odisha. Steinbildhauerei, Tempelarchitektur und die Guru-Shishya-Akademie.",
-            "マハパトラ手工芸エンポリアム、ブバネーシュワル、オディシャ。石彫、寺院建築、グル・シシュヤ学院。"
+            "Mahapatra Handicrafts Emporium, a unit of P.R. Exports. Stone carving in Bhubaneswar, Odisha. Nuagaon, Gangotri Nagar.",
+            "Mahapatra Handicrafts Emporium, une unité de P.R. Exports. Taille de la pierre à Bhubaneswar, Odisha. Nuagaon, Gangotri Nagar.",
+            "Mahapatra Handicrafts Emporium, eine Einheit von P.R. Exports. Steinbildhauerei in Bhubaneswar, Odisha. Nuagaon, Gangotri Nagar.",
+            "マハパトラ手工芸エンポリアム（P.R. Exportsの一部門）。オディシャ州ブバネーシュワルの石彫。ヌアガオン、ガングトリ・ナガル。"
         ],
         ["footer.rights"] = [
             "Mahapatra Handicrafts Emporium. All rights reserved.",
@@ -348,10 +348,10 @@ public static class UiText
         ],
         ["info.org"] = ["Organization", "Organisation", "Organisation", "所属"],
         ["info.org.v"] = [
-            "Mahapatra Handicrafts Emporium",
-            "Mahapatra Handicrafts Emporium",
-            "Mahapatra Handicrafts Emporium",
-            "マハパトラ手工芸エンポリアム"
+            "Mahapatra Handicrafts Emporium (A unit of P.R. Exports)",
+            "Mahapatra Handicrafts Emporium (une unité de P.R. Exports)",
+            "Mahapatra Handicrafts Emporium (eine Einheit von P.R. Exports)",
+            "マハパトラ手工芸エンポリアム（P.R. Exportsの一部門）"
         ],
         ["info.years"] = ["Years active", "Années d’activité", "Aktiv seit", "活動期間"],
         ["info.years.v"] = ["1985 – present", "1985 – aujourd’hui", "1985 – heute", "1985年 – 現在"],
@@ -568,10 +568,10 @@ public static class UiText
         ["contact.kicker"] = ["Correspondence", "Correspondance", "Korrespondenz", "書簡"],
         ["contact.title"] = ["Write to the emporium", "Écrire à l’emporium", "An das Emporium schreiben", "エンポリアムへ書く"],
         ["contact.lede"] = [
-            "Museums, architects, collectors, governments, students and the press. Mahapatra Handicrafts Emporium, Bhubaneswar, Odisha, India.",
-            "Musées, architectes, collectionneurs, gouvernements, étudiants et presse. Mahapatra Handicrafts Emporium, Bhubaneswar, Odisha, Inde.",
-            "Museen, Architekten, Sammler, Regierungen, Studierende und Presse. Mahapatra Handicrafts Emporium, Bhubaneswar, Odisha, Indien.",
-            "美術館、建築家、蒐集家、政府、学生、報道。インド・オディシャ州ブバネーシュワル、マハパトラ手工芸エンポリアム。"
+            "Museums, architects, collectors, governments, students and the press. Mahapatra Handicrafts Emporium, a unit of P.R. Exports. Stone carving in Bhubaneswar, Odisha.",
+            "Musées, architectes, collectionneurs, gouvernements, étudiants et presse. Mahapatra Handicrafts Emporium, une unité de P.R. Exports. Taille de la pierre à Bhubaneswar, Odisha.",
+            "Museen, Architekten, Sammler, Regierungen, Studierende und Presse. Mahapatra Handicrafts Emporium, eine Einheit von P.R. Exports. Steinbildhauerei in Bhubaneswar, Odisha.",
+            "美術館、建築家、蒐集家、政府、学生、報道。マハパトラ手工芸エンポリアム（P.R. Exportsの一部門）。オディシャ州ブバネーシュワルの石彫。"
         ],
         ["contact.address"] = ["Address", "Adresse", "Adresse", "住所"],
         ["contact.phone"] = ["Telephone", "Téléphone", "Telefon", "電話"],

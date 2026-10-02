@@ -77,10 +77,10 @@ public static class ContentBiography
                 "Das Mahapatra Handicrafts Emporium",
                 "マハパトラ手工芸エンポリアム"),
             new LStr(
-                "In 2006 he established Mahapatra Handicrafts Emporium, a permanent home for temple sculpture, sacred images, architectural stone and training. The showroom stands at 6, Nuagaon Chhack, Puri Road, Bhubaneswar 751002. The workshop remains at Kharakhia Baidyanath Lane, Plot No. 1359, Old Town. In 2016 he became a life member of the Federation of Indian Granite & Stone Association.",
-                "En 2006 il fonda le Mahapatra Handicrafts Emporium. La galerie est au 6, Nuagaon Chhack, Puri Road, Bhubaneswar 751002. L’atelier reste à Kharakhia Baidyanath Lane, parcelle 1359, vieille ville. En 2016 il devint membre à vie de la Federation of Indian Granite & Stone Association.",
-                "2006 gründete er das Mahapatra Handicrafts Emporium, ein dauerhaftes Haus für Tempelskulptur, heilige Bilder, Architekturstein und Unterricht. 2016 wurde er lebenslanges Mitglied der Federation of Indian Granite & Stone Association. Das Emporium in Bhubaneswar ist heute die Adresse des Ateliers.",
-                "2006年、マハパトラ手工芸エンポリアムを設立し、寺院彫刻、聖像、建築石材、教育のための恒久の場としました。2016年、インド花崗岩・石材協会（Federation of Indian Granite & Stone Association）の終身会員。工房の所在は、オディシャ州ブバネーシュワルです。")),
+                "In 2006 he established Mahapatra Handicrafts Emporium, a unit of P.R. Exports: a permanent home for temple sculpture, sacred images, architectural stone and training. Stone carving continues in Bhubaneswar. The emporium stands at Nuagaon, Gangotri Nagar, Bhubaneswar, Odisha 751002. In 2016 he became a life member of the Federation of Indian Granite & Stone Association.",
+                "En 2006 il fonda le Mahapatra Handicrafts Emporium, une unité de P.R. Exports. La taille de la pierre se poursuit à Bhubaneswar. L’emporium est à Nuagaon, Gangotri Nagar, Bhubaneswar, Odisha 751002. En 2016 il devint membre à vie de la Federation of Indian Granite & Stone Association.",
+                "2006 gründete er das Mahapatra Handicrafts Emporium, eine Einheit von P.R. Exports, ein dauerhaftes Haus für Tempelskulptur, heilige Bilder, Architekturstein und Unterricht. Die Steinbildhauerei geht in Bhubaneswar weiter. Das Emporium steht in Nuagaon, Gangotri Nagar, Bhubaneswar, Odisha 751002. 2016 wurde er lebenslanges Mitglied der Federation of Indian Granite & Stone Association.",
+                "2006年、P.R. Exportsの一部門としてマハパトラ手工芸エンポリアムを設立し、寺院彫刻、聖像、建築石材、教育のための恒久の場としました。石彫はブバネーシュワルで続いています。所在はオディシャ州ブバネーシュワル、ヌアガオン、ガングトリ・ナガル、751002。2016年、インド花崗岩・石材協会（Federation of Indian Granite & Stone Association）の終身会員。")),
         new("teaching",
             new LStr(
                 "A thousand artisans, and colour held in stone",
@@ -152,10 +152,10 @@ public static class ContentBiography
         new("2006",
             new LStr("Mahapatra Handicrafts Emporium", "Mahapatra Handicrafts Emporium", "Mahapatra Handicrafts Emporium", "マハパトラ手工芸エンポリアム"),
             new LStr(
-                "The atelier is established as a house for sculpture, architecture and training.",
-                "L’atelier est établi comme maison de sculpture, d’architecture et d’enseignement.",
-                "Das Atelier wird als Haus für Skulptur, Architektur und Unterricht gegründet.",
-                "彫刻、建築、教育のための家として工房を設立。")),
+                "The atelier is established as a house for sculpture, architecture and training, at Nuagaon, Gangotri Nagar, Bhubaneswar.",
+                "L’atelier est établi comme maison de sculpture, d’architecture et d’enseignement, à Nuagaon, Gangotri Nagar, Bhubaneswar.",
+                "Das Atelier wird als Haus für Skulptur, Architektur und Unterricht gegründet, in Nuagaon, Gangotri Nagar, Bhubaneswar.",
+                "彫刻、建築、教育のための家として、ブバネーシュワル、ヌアガオン、ガングトリ・ナガルに工房を設立。")),
         new("2014",
             new LStr("Silpi Kala Bhaskara", "Silpi Kala Bhaskara", "Silpi Kala Bhaskara", "シルピ・カラ・バースカラ"),
             new LStr(
