@@ -15,10 +15,20 @@
     <div class="wrap press-list">
         @foreach (var item in Catalog.Press)
         {
+            var frames = Media.Gallery("press/" + item.Id);
             <article class="glass" id="@item.Id">
                 <p class="kicker">@item.Kind.Of(Site.Culture) · @item.Year</p>
                 <h2>@item.Title.Of(Site.Culture)</h2>
                 <p>@item.Body.Of(Site.Culture)</p>
+                @if (frames.Count > 0)
+                {
+                    <div class="filmstrip wide">
+                        @foreach (var frame in frames)
+                        {
+                            <img src="@frame" alt="@item.Title.Of(Site.Culture)" />
+                        }
+                    </div>
+                }
             </article>
         }
     </div>
