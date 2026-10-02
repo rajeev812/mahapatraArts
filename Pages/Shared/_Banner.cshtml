@@ -1,0 +1,10 @@
+@if (Context.Request.Query["sent"] == "1")
+{
+    <p class="banner glass" role="status">
+        @Site.T("form.sent")
+        @if (!string.IsNullOrEmpty(Context.Request.Query["ref"]))
+        {
+            <strong> @Context.Request.Query["ref"]</strong>
+        }
+    </p>
+}

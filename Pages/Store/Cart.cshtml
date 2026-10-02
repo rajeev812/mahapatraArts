@@ -1,0 +1,56 @@
+@page "/store/cart"
+@model CartModel
+@{
+    ViewData["Title"] = Site.T("cart.title");
+    ViewData["Description"] = Site.T("seo.cart");
+    ViewData["Path"] = "/store/cart";
+    ViewData["NoIndex"] = true;
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker">@Site.T("cart.kicker")</p>
+            <h1>@Site.T("cart.title")</h1>
+        </div>
+    </header>
+    <div class="wrap">
+        @if (Model.Lines.Count == 0)
+        {
+            <p class="lede">@Site.T("cart.empty")</p>
+            <p class="link-row">
+                <a class="btn btn-line" href="@Site.Href("/store")">@Site.T("cart.continue")</a>
+                <a class="btn btn-gold" href="@Site.Href("/store/quotation")">@Site.T("cart.quote")</a>
+            </p>
+        }
+        else
+        {
+            <ul class="cart-list">
+                @foreach (var line in Model.Lines)
+                {
+                    <li class="glass">
+                        <a href="@Site.Href("/store/" + line.Product.Slug)">@line.Product.Title.Of(Site.Culture)</a>
+                        <span>@Site.Format(line.Product.GuidePriceInr)</span>
+                        <form method="post" action="@Site.Href("/store/cart")?handler=Update">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="slug" value="@line.Product.Slug" />
+                            <label>
+                                <span class="sr">@Site.T("cart.qty")</span>
+                                <input name="qty" type="number" min="0" max="9" value="@line.Qty" />
+                            </label>
+                            <button class="btn btn-line" type="submit">@Site.T("cart.update")</button>
+                        </form>
+                        <form method="post" action="@Site.Href("/store/cart")?handler=Remove">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="slug" value="@line.Product.Slug" />
+                            <button class="text-btn" type="submit">@Site.T("cart.remove")</button>
+                        </form>
+                    </li>
+                }
+            </ul>
+            <p class="link-row">
+                <a class="btn btn-line" href="@Site.Href("/store")">@Site.T("cart.continue")</a>
+                <a class="btn btn-gold" href="@Site.Href("/store/quotation")">@Site.T("cart.quote")</a>
+            </p>
+        }
+    </div>
+</article>

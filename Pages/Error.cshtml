@@ -1,0 +1,17 @@
+@page "/error"
+@model ErrorModel
+@{
+    ViewData["Title"] = Site.T("err.title");
+    ViewData["Description"] = Site.T("err.body");
+    ViewData["Path"] = "/error";
+    ViewData["NoIndex"] = true;
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <h1>@Site.T("err.title")</h1>
+            <p class="lede">@Site.T("err.body")</p>
+            <a class="btn btn-gold" href="@Site.Href("/")">@Site.T("nav.home")</a>
+        </div>
+    </header>
+</article>

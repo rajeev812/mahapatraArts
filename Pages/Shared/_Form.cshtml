@@ -1,0 +1,97 @@
+@model FormSpec
+@{
+    var form = ViewData["Form"] as EnquiryForm ?? new EnquiryForm();
+}
+@await Html.PartialAsync("_Banner")
+<form class="letter glass" method="post" action="@Model.Action" novalidate>
+    @Html.AntiForgeryToken()
+    @if (!string.IsNullOrWhiteSpace(Model.Intro))
+    {
+        <p>@Model.Intro</p>
+    }
+    <div class="form-error" asp-validation-summary="ModelOnly"></div>
+    <div class="fields">
+        <label>
+            <span>@Site.T("form.name")</span>
+            <input name="Form.Name" value="@form.Name" autocomplete="name" required maxlength="120" />
+            <small>@Html.ValidationMessage("Form.Name")</small>
+        </label>
+        <label>
+            <span>@Site.T("form.email")</span>
+            <input name="Form.Email" type="email" value="@form.Email" autocomplete="email" required maxlength="160" />
+            <small>@Html.ValidationMessage("Form.Email")</small>
+        </label>
+        <label>
+            <span>@Site.T("form.phone")</span>
+            <input name="Form.Phone" value="@form.Phone" autocomplete="tel" maxlength="40" />
+        </label>
+        <label>
+            <span>@Site.T("form.country")</span>
+            <input name="Form.Country" value="@form.Country" autocomplete="country-name" maxlength="80" />
+        </label>
+        @if (Model.ShowTopic)
+        {
+            <label class="span-2">
+                <span>@Site.T("form.topic")</span>
+                <select name="Form.Topic">
+                    <option value="buy">@Site.T("topic.buy")</option>
+                    <option value="temple">@Site.T("topic.temple")</option>
+                    <option value="learn">@Site.T("topic.learn")</option>
+                    <option value="exhibit">@Site.T("topic.exhibit")</option>
+                    <option value="media">@Site.T("topic.media")</option>
+                </select>
+            </label>
+        }
+        @if (Model.ShowProgram)
+        {
+            <label class="span-2">
+                <span>@Site.T("form.program")</span>
+                <select name="Form.Program">
+                    <option value="">—</option>
+                    @foreach (var course in Catalog.Courses)
+                    {
+                        if (form.Program == course.Id)
+                        {
+                            <option value="@course.Id" selected>@course.Title.Of(Site.Culture) — @course.Duration.Of(Site.Culture)</option>
+                        }
+                        else
+                        {
+                            <option value="@course.Id">@course.Title.Of(Site.Culture) — @course.Duration.Of(Site.Culture)</option>
+                        }
+                    }
+                </select>
+                <small>@Html.ValidationMessage("Form.Program")</small>
+            </label>
+        }
+        @if (Model.ShowOption)
+        {
+            <label class="span-2">
+                <span>@Site.T("form.option")</span>
+                <select name="Form.Option">
+                    <option value="">—</option>
+                    <option value="private">@Site.T("opt.private")</option>
+                    <option value="group">@Site.T("opt.group")</option>
+                    <option value="tour">@Site.T("opt.tour")</option>
+                    <option value="residency">@Site.T("opt.residency")</option>
+                </select>
+                <small>@Html.ValidationMessage("Form.Option")</small>
+            </label>
+        }
+        @if (Model.ShowAmount)
+        {
+            <label>
+                <span>@Site.T("form.amount")</span>
+                <input name="Form.Amount" inputmode="numeric" value="@form.Amount" maxlength="12" data-amount-field />
+            </label>
+        }
+        <label class="span-2">
+            <span>@Site.T("form.message")</span>
+            <textarea name="Form.Message" rows="6" required maxlength="4000">@form.Message</textarea>
+            <small>@Html.ValidationMessage("Form.Message")</small>
+        </label>
+    </div>
+    <div class="hp" aria-hidden="true">
+        <label>@Site.T("form.honeypot") <input name="Form.Website" tabindex="-1" autocomplete="off" /></label>
+    </div>
+    <button class="btn btn-gold" type="submit">@Site.T(Model.SubmitKey)</button>
+</form>

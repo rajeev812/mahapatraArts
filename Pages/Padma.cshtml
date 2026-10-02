@@ -1,0 +1,38 @@
+@page "/padma-shri"
+@{
+    ViewData["Title"] = Site.T("padma.title");
+    ViewData["Description"] = Site.T("seo.padma");
+    ViewData["Path"] = "/padma-shri";
+}
+<article class="page dossier-page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker">@Site.T("padma.kicker")</p>
+            <h1>@Site.T("padma.title")</h1>
+            <p class="lede">@Site.T("padma.lede")</p>
+        </div>
+    </header>
+    <div class="wrap prose">
+        <aside class="callout glass">
+            <p>@Site.T("padma.note")</p>
+        </aside>
+        <dl class="facts glass">
+            <dt>@Site.T("info.name")</dt><dd>Guru Ramakanta Mahapatra</dd>
+            <dt>@Site.T("info.born")</dt><dd>@Site.T("info.born.v")</dd>
+            <dt>@Site.T("padma.field")</dt><dd>@Site.T("padma.field.v")</dd>
+            <dt>@Site.T("info.org")</dt><dd>@Site.T("info.org.v")</dd>
+            <dt>@Site.T("info.award")</dt><dd>@Site.T("info.award.v")</dd>
+            <dt>@Site.T("info.known")</dt><dd>@Site.T("info.known.v")</dd>
+            <dt>@Site.T("stat.artisans.l")</dt><dd>1000+</dd>
+            <dt>@Site.T("stat.intl.l")</dt><dd>India, Japan, Singapore, Italy, Thailand, Russia, USA, Israel</dd>
+        </dl>
+        @foreach (var chapter in Catalog.Biography.Where(s => s.Id is "honours" or "japan" or "teaching" or "nomination"))
+        {
+            <section>
+                <h2>@chapter.Heading.Of(Site.Culture)</h2>
+                <p>@chapter.Body.Of(Site.Culture)</p>
+            </section>
+        }
+        <p><button class="btn btn-line" type="button" id="print-dossier">@Site.T("padma.print")</button></p>
+    </div>
+</article>

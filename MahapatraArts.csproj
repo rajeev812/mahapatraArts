@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>MahapatraArts</RootNamespace>
+    <AssemblyName>MahapatraArts</AssemblyName>
+    <Description>Mahapatra Arts — atelier of Guru Ramakanta Mahapatra, National Awardee stone sculptor of Odisha.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="tests/**" />
+    <Content Remove="tests/**" />
+    <None Remove="tests/**" />
+  </ItemGroup>
+</Project>

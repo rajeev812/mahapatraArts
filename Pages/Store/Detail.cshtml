@@ -1,0 +1,94 @@
+@page "/store/{slug}"
+@model ProductModel
+@{
+    var item = Model.Item!;
+    var title = item.Title.Of(Site.Culture);
+    ViewData["Title"] = title;
+    ViewData["Description"] = item.Story.Of(Site.Culture);
+    ViewData["Path"] = "/store/" + item.Slug;
+    var wa = Site.WhatsAppHref(title + " — Mahapatra Arts");
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker"><a href="@Site.Href("/store")">@Site.T("store.title")</a> · @Site.T("pcat." + item.Category)</p>
+            <h1>@title</h1>
+            <p class="price">@Site.Format(item.GuidePriceInr)</p>
+        </div>
+    </header>
+    <div class="wrap detail">
+        <div class="stage" tabindex="0" aria-label="@Site.T("product.view3d")">
+            <div class="cube" id="cube">
+                <div class="face front">
+                    @await Html.PartialAsync("_Plate", new PlateView("products/" + item.Slug, item.Motif, title, "tall"))
+                </div>
+                <div class="face back">
+                    <div class="certificate">
+                        <p>Mahapatra Handicrafts Emporium</p>
+                        <h2>@Site.T("product.cert")</h2>
+                        <p>Guru Ramakanta Mahapatra</p>
+                        <strong>@title</strong>
+                        <span>@item.Stone</span>
+                        <i class="seal">RM</i>
+                    </div>
+                </div>
+            </div>
+            <p class="hint">@Site.T("product.view3d")</p>
+        </div>
+        <div class="prose">
+            <p class="note">@Site.T("price.note")</p>
+            <dl class="facts glass">
+                <dt>@Site.T("stone")</dt><dd>@item.Stone</dd>
+                <dt>@Site.T("dimensions")</dt><dd>@item.Dimensions.Of(Site.Culture)</dd>
+                <dt>@Site.T("price.guide")</dt><dd>@Site.Format(item.GuidePriceInr)</dd>
+            </dl>
+            <h2>@Site.T("product.story")</h2>
+            <p>@item.Story.Of(Site.Culture)</p>
+            <form method="post" action="@Site.Href("/store/cart")?handler=Add">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="slug" value="@item.Slug" />
+                <label class="qty">
+                    <span>@Site.T("cart.qty")</span>
+                    <input name="qty" type="number" min="1" max="9" value="1" />
+                </label>
+                <button class="btn btn-gold" type="submit">@Site.T("product.add")</button>
+            </form>
+            <p class="link-row">
+                <a href="@Site.Href("/store/quotation")">@Site.T("quote.title")</a>
+                @if (wa is not null)
+                {
+                    <a href="@wa">@Site.T("store.wa")</a>
+                }
+            </p>
+        </div>
+    </div>
+    <div class="wrap">
+        <h2>@Site.T("product.process")</h2>
+        <ol class="steps">
+            @for (var step = 1; step <= 6; step++)
+            {
+                <li class="glass">
+                    <span>0@step</span>
+                    <h3>@Site.T($"step.{step}.t")</h3>
+                    <p>@Site.T($"step.{step}.b")</p>
+                </li>
+            }
+        </ol>
+        <h2>@Site.T("product.cert")</h2>
+        <p class="lede">@Site.T("product.cert.body")</p>
+        <h2>@Site.T("store.ship")</h2>
+        <p>@Site.T("store.ship.body")</p>
+        <h2>@Site.T("related")</h2>
+        <div class="product-grid">
+            @foreach (var product in Model.Related)
+            {
+                <article class="card glass">
+                    <a href="@Site.Href("/store/" + product.Slug)">
+                        @await Html.PartialAsync("_Plate", new PlateView("products/" + product.Slug, product.Motif, product.Title.Of(Site.Culture)))
+                        <div class="card-body"><h3>@product.Title.Of(Site.Culture)</h3><p>@Site.Format(product.GuidePriceInr)</p></div>
+                    </a>
+                </article>
+            }
+        </div>
+    </div>
+</article>

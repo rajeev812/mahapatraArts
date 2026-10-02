@@ -1,0 +1,50 @@
+@page "/store/quotation"
+@model QuoteModel
+@{
+    ViewData["Title"] = Site.T("quote.title");
+    ViewData["Description"] = Site.T("seo.quote");
+    ViewData["Path"] = "/store/quotation";
+    ViewData["NoIndex"] = true;
+    ViewData["Form"] = Model.Form;
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker">@Site.T("quote.kicker")</p>
+            <h1>@Site.T("quote.title")</h1>
+            <p class="lede">@Site.T("quote.lede")</p>
+        </div>
+    </header>
+    <div class="wrap split">
+        <div>
+            <ol class="steps compact">
+                <li class="glass"><span>01</span><h3>@Site.T("cart.title")</h3></li>
+                <li class="glass"><span>02</span><h3>@Site.T("quote.title")</h3></li>
+                <li class="glass"><span>03</span><h3>@Site.T("store.secure")</h3></li>
+            </ol>
+            @if (Model.Lines.Count == 0)
+            {
+                <p>@Site.T("cart.empty")</p>
+            }
+            else
+            {
+                <ul class="plain">
+                    @foreach (var line in Model.Lines)
+                    {
+                        <li>@line.Product.Title.Of(Site.Culture) × @line.Qty — @Site.Format(line.Product.GuidePriceInr)</li>
+                    }
+                </ul>
+            }
+            <p>@Site.T("store.secure.body")</p>
+            @if (!string.IsNullOrWhiteSpace(Site.Options.PaymentUrl))
+            {
+                <p><a href="@Site.Options.PaymentUrl">@Site.T("store.pay")</a></p>
+            }
+        </div>
+        @await Html.PartialAsync("_Form", new FormSpec
+        {
+            Action = Site.Href("/store/quotation"),
+            SubmitKey = "cart.quote"
+        })
+    </div>
+</article>

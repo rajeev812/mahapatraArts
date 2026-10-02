@@ -1,0 +1,44 @@
+@page "/academy"
+@model AcademyModel
+@{
+    ViewData["Title"] = Site.T("academy.title");
+    ViewData["Description"] = Site.T("seo.academy");
+    ViewData["Path"] = "/academy";
+    ViewData["Form"] = Model.Form;
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker">@Site.T("academy.kicker")</p>
+            <h1>@Site.T("academy.title")</h1>
+            <p class="lede">@Site.T("academy.lede")</p>
+        </div>
+    </header>
+    <div class="wrap">
+        <h2>@Site.T("academy.features")</h2>
+        <ul class="feature-row">
+            <li class="glass">@Site.T("feat.certificate")</li>
+            <li class="glass">@Site.T("feat.stay")</li>
+            <li class="glass">@Site.T("feat.tours")</li>
+            <li class="glass">@Site.T("feat.hands")</li>
+            <li class="glass">@Site.T("feat.design")</li>
+        </ul>
+        <div class="course-grid">
+            @foreach (var course in Catalog.Courses)
+            {
+                <article class="glass" id="@course.Id">
+                    <p class="kicker">@course.Duration.Of(Site.Culture)</p>
+                    <h3>@course.Title.Of(Site.Culture)</h3>
+                    <p>@course.Summary.Of(Site.Culture)</p>
+                </article>
+            }
+        </div>
+        <h2>@Site.T("academy.book")</h2>
+        @await Html.PartialAsync("_Form", new FormSpec
+        {
+            Action = Site.Href("/academy"),
+            SubmitKey = "academy.book",
+            ShowProgram = true
+        })
+    </div>
+</article>

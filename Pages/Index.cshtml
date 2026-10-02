@@ -1,0 +1,237 @@
+@page "/"
+@{
+    ViewData["Title"] = Site.T("site.name");
+    ViewData["Description"] = Site.T("seo.home");
+    ViewData["Path"] = "/";
+    var video = Media.Video("film/hero");
+    var scenes = new (string Key, string Slot)[]
+    {
+        ("hero.scene.carving", "film/carving"),
+        ("hero.scene.temple", "film/temple"),
+        ("hero.scene.workshop", "film/workshop"),
+        ("hero.scene.awards", "film/awards"),
+        ("hero.scene.world", "film/world")
+    };
+    var portrait = Media.Find("portraits/guru");
+}
+<section class="hero on-dark">
+    <div class="hero-media" id="film">
+        @if (video is not null)
+        {
+            <video id="hero-video" autoplay muted loop playsinline poster="@Media.Find("film/poster")">
+                <source src="@video" type="@(video.EndsWith(".webm") ? "video/webm" : "video/mp4")" />
+            </video>
+        }
+        else
+        {
+            var index = 0;
+            foreach (var scene in scenes)
+            {
+                var still = Media.Find(scene.Slot);
+                <div class="scene scene-@index @(still is null ? "" : "has-still")" style="@(still is null ? null : $"--still:url('{still}')")">
+                    <span class="scene-word">@Site.T(scene.Key)</span>
+                </div>
+                index++;
+            }
+        }
+        <div class="hero-shade"></div>
+        <div class="hero-etch" aria-hidden="true">
+            <svg viewBox="0 0 160 200"><use href="#motif-temple" /></svg>
+        </div>
+    </div>
+    <div class="wrap hero-copy">
+        <p class="kicker">@Site.T("hero.kicker")</p>
+        <h1>@Html.Raw(Site.T("hero.title.html"))</h1>
+        <p class="hero-sub">@Site.T("hero.sub")</p>
+        <div class="cta-row">
+            <a class="btn btn-gold" href="@Site.Href("/masterpieces")">@Site.T("hero.cta.works")</a>
+            <a class="btn btn-glass" href="@Site.Href("/workshops")">@Site.T("hero.cta.workshop")</a>
+            <a class="btn btn-glass" href="@Site.Href("/store")">@Site.T("hero.cta.store")</a>
+        </div>
+        <button class="text-btn light" type="button" id="film-toggle" aria-pressed="false" data-pause="@Site.T("hero.pause")" data-play="@Site.T("hero.play")">@Site.T("hero.pause")</button>
+    </div>
+    <div class="wrap">
+        <dl class="stats glass-dark">
+            <div><dt data-count="40" data-suffix="+">40+</dt><dd>@Site.T("stat.years.l")</dd></div>
+            <div><dt data-count="1000" data-suffix="+">1000+</dt><dd>@Site.T("stat.artisans.l")</dd></div>
+            <div><dt data-count="2005" data-suffix="">2005</dt><dd>@Site.T("stat.award.l")</dd></div>
+            <div><dt data-count="8" data-suffix="">8</dt><dd>@Site.T("stat.intl.l")</dd></div>
+            <div><dt>@Site.T("stat.temple.n")</dt><dd>@Site.T("stat.temple.l")</dd></div>
+        </dl>
+    </div>
+</section>
+
+<section class="section">
+    <div class="wrap split">
+        <div>
+            @if (portrait is not null)
+            {
+                <figure class="portrait glass">
+                    <img src="@portrait" alt="@Site.T("bio.title")" />
+                </figure>
+            }
+            else
+            {
+                <div class="monogram glass">
+                    <span>RM</span>
+                    <small>1969 · Puri</small>
+                </div>
+            }
+        </div>
+        <div class="prose">
+            <p class="kicker">@Site.T("home.master.kicker")</p>
+            <h2>@Site.T("home.master.title")</h2>
+            <p>@Site.T("home.master.body")</p>
+            <a class="btn btn-line" href="@Site.Href("/biography")">@Site.T("home.master.cta")</a>
+        </div>
+    </div>
+</section>
+
+<section class="section band">
+    <div class="wrap">
+        <p class="kicker">@Site.T("home.works.kicker")</p>
+        <div class="section-head">
+            <h2>@Site.T("home.works.title")</h2>
+            <a href="@Site.Href("/masterpieces")">@Site.T("home.works.cta")</a>
+        </div>
+        <div class="rail">
+            @foreach (var work in Catalog.Works.Take(6))
+            {
+                <article class="card glass">
+                    <a href="@Site.Href("/masterpieces/" + work.Slug)">
+                        @await Html.PartialAsync("_Plate", new PlateView("works/" + work.Slug, work.Motif, work.Title.Of(Site.Culture), work.Frame))
+                        <div class="card-body">
+                            <h3>@work.Title.Of(Site.Culture)</h3>
+                            <p>@work.Location.Of(Site.Culture)</p>
+                        </div>
+                    </a>
+                </article>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="wrap">
+        <p class="kicker">@Site.T("home.pillars.kicker")</p>
+        <h2 class="display">@Site.T("home.pillars.title")</h2>
+        <div class="pillars">
+            <article class="glass">
+                <p class="num">01</p>
+                <h3>@Site.T("home.pillar1.title")</h3>
+                <p>@Site.T("home.pillar1.body")</p>
+            </article>
+            <article class="glass">
+                <p class="num">02</p>
+                <h3>@Site.T("home.pillar2.title")</h3>
+                <p>@Site.T("home.pillar2.body")</p>
+            </article>
+            <article class="glass">
+                <p class="num">03</p>
+                <h3>@Site.T("home.pillar3.title")</h3>
+                <p>@Site.T("home.pillar3.body")</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="section world-band on-dark">
+    <div class="wrap split">
+        <div>
+            <p class="kicker">@Site.T("home.global.kicker")</p>
+            <h2>@Site.T("home.global.title")</h2>
+            <p>@Site.T("home.global.body")</p>
+            <a class="btn btn-gold" href="@Site.Href("/global-projects")">@Site.T("home.global.cta")</a>
+        </div>
+        <ul class="country-list">
+            @foreach (var place in Catalog.Destinations)
+            {
+                <li><a href="@Site.Href("/global-projects")#@place.Id">@place.Country.Of(Site.Culture)</a></li>
+            }
+        </ul>
+    </div>
+</section>
+
+<section class="section">
+    <div class="wrap split">
+        <div class="prose">
+            <p class="kicker">@Site.T("home.academy.kicker")</p>
+            <h2>@Site.T("home.academy.title")</h2>
+            <p>@Site.T("home.academy.body")</p>
+            <a class="btn btn-line" href="@Site.Href("/academy")">@Site.T("home.academy.cta")</a>
+        </div>
+        <ol class="course-list">
+            @foreach (var course in Catalog.Courses)
+            {
+                <li class="glass">
+                    <span>@course.Duration.Of(Site.Culture)</span>
+                    <strong>@course.Title.Of(Site.Culture)</strong>
+                </li>
+            }
+        </ol>
+    </div>
+</section>
+
+<section class="section band">
+    <div class="wrap">
+        <p class="kicker">@Site.T("home.store.kicker")</p>
+        <div class="section-head">
+            <h2>@Site.T("home.store.title")</h2>
+            <a href="@Site.Href("/store")">@Site.T("home.store.cta")</a>
+        </div>
+        <p class="lede">@Site.T("home.store.body")</p>
+        <div class="product-grid">
+            @foreach (var product in Catalog.Products.Take(4))
+            {
+                <article class="card glass">
+                    <a href="@Site.Href("/store/" + product.Slug)">
+                        @await Html.PartialAsync("_Plate", new PlateView("products/" + product.Slug, product.Motif, product.Title.Of(Site.Culture)))
+                        <div class="card-body">
+                            <h3>@product.Title.Of(Site.Culture)</h3>
+                            <p>@Site.Format(product.GuidePriceInr)</p>
+                        </div>
+                    </a>
+                </article>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="wrap">
+        <p class="kicker">@Site.T("home.awards.kicker")</p>
+        <div class="section-head">
+            <h2>@Site.T("home.awards.title")</h2>
+            <a href="@Site.Href("/awards")">@Site.T("home.awards.cta")</a>
+        </div>
+        <ol class="award-row">
+            @foreach (var award in Catalog.Awards.Take(4))
+            {
+                <li class="glass">
+                    <span>@award.Year</span>
+                    <strong>@award.Title.Of(Site.Culture)</strong>
+                </li>
+            }
+        </ol>
+    </div>
+</section>
+
+<section class="section motto">
+    <div class="wrap">
+        <blockquote>
+            <p>@Site.T("home.motto")</p>
+            <footer>@Site.T("home.motto.by")</footer>
+        </blockquote>
+    </div>
+</section>
+
+<section class="section">
+    <div class="wrap patronage glass">
+        <div>
+            <p class="kicker">@Site.T("home.donate.kicker")</p>
+            <h2>@Site.T("home.donate.title")</h2>
+            <p>@Site.T("home.donate.body")</p>
+        </div>
+        <a class="btn btn-gold" href="@Site.Href("/donate")">@Site.T("home.donate.cta")</a>
+    </div>
+</section>

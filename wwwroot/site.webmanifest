@@ -1,0 +1,12 @@
+{
+  "name": "Mahapatra Arts | Master Stone Sculptor | National Awardee",
+  "short_name": "Mahapatra Arts",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f6f1e7",
+  "theme_color": "#2a1810",
+  "lang": "en",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

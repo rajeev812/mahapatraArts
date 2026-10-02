@@ -1,0 +1,27 @@
+@page "/timeline"
+@{
+    ViewData["Title"] = Site.T("time.title");
+    ViewData["Description"] = Site.T("seo.timeline");
+    ViewData["Path"] = "/timeline";
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker">@Site.T("time.kicker")</p>
+            <h1>@Site.T("time.title")</h1>
+            <p class="lede">@Site.T("time.lede")</p>
+        </div>
+    </header>
+    <div class="wrap">
+        <ol class="timeline">
+            @foreach (var mile in Catalog.Timeline)
+            {
+                <li class="glass">
+                    <span class="when">@mile.Year</span>
+                    <h2>@mile.Title.Of(Site.Culture)</h2>
+                    <p>@mile.Body.Of(Site.Culture)</p>
+                </li>
+            }
+        </ol>
+    </div>
+</article>

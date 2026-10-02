@@ -1,0 +1,57 @@
+@page "/biography"
+@{
+    ViewData["Title"] = Site.T("bio.title");
+    ViewData["Description"] = Site.T("seo.bio");
+    ViewData["Path"] = "/biography";
+    var portrait = Media.Find("portraits/guru");
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker">@Site.T("bio.kicker")</p>
+            <h1>@Site.T("bio.title")</h1>
+            <p class="lede">@Site.T("bio.lede")</p>
+        </div>
+    </header>
+    <div class="wrap biography">
+        <aside class="infobox glass">
+            @if (portrait is not null)
+            {
+                <img class="infobox-photo" src="@portrait" alt="@Site.T("bio.title")" />
+            }
+            else
+            {
+                <div class="monogram small"><span>RM</span></div>
+            }
+            <p class="kicker">@Site.T("info.title")</p>
+            <dl>
+                <dt>@Site.T("info.name")</dt><dd>Guru Ramakanta Mahapatra</dd>
+                <dt>@Site.T("info.born")</dt><dd>@Site.T("info.born.v")</dd>
+                <dt>@Site.T("info.nationality")</dt><dd>@Site.T("info.nationality.v")</dd>
+                <dt>@Site.T("info.occupation")</dt><dd>@Site.T("info.occupation.v")</dd>
+                <dt>@Site.T("info.known")</dt><dd>@Site.T("info.known.v")</dd>
+                <dt>@Site.T("info.org")</dt><dd>@Site.T("info.org.v")</dd>
+                <dt>@Site.T("info.years")</dt><dd>@Site.T("info.years.v")</dd>
+                <dt>@Site.T("info.award")</dt><dd>@Site.T("info.award.v")</dd>
+            </dl>
+        </aside>
+        <p class="note">@Site.T("bio.note")</p>
+        <nav class="toc glass" aria-label="@Site.T("bio.toc")">
+            <p class="kicker">@Site.T("bio.toc")</p>
+            <ol>
+                @foreach (var chapter in Catalog.Biography)
+                {
+                    <li><a href="#@chapter.Id">@chapter.Heading.Of(Site.Culture)</a></li>
+                }
+            </ol>
+        </nav>
+        @foreach (var chapter in Catalog.Biography)
+        {
+            <section id="@chapter.Id" class="bio-section">
+                <h2>@chapter.Heading.Of(Site.Culture)</h2>
+                <p>@chapter.Body.Of(Site.Culture)</p>
+            </section>
+        }
+        <p><a class="btn btn-line" href="@Site.Href("/timeline")">@Site.T("time.title")</a></p>
+    </div>
+</article>

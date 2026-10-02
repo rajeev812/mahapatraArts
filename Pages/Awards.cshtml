@@ -1,0 +1,45 @@
+@page "/awards"
+@{
+    ViewData["Title"] = Site.T("awards.title");
+    ViewData["Description"] = Site.T("seo.awards");
+    ViewData["Path"] = "/awards";
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker">@Site.T("awards.kicker")</p>
+            <h1>@Site.T("awards.title")</h1>
+            <p class="lede">@Site.T("awards.lede")</p>
+        </div>
+    </header>
+    <div class="wrap">
+        <ol class="timeline awards">
+            @foreach (var award in Catalog.Awards)
+            {
+                var photo = Media.Find("awards/" + award.Slug);
+                <li class="glass" id="@award.Slug">
+                    <span class="when">@award.Year</span>
+                    <div class="award-body">
+                        <h2>@award.Title.Of(Site.Culture)</h2>
+                        <p>@award.Body.Of(Site.Culture)</p>
+                    </div>
+                    <div class="cert-frame">
+                        @if (photo is not null)
+                        {
+                            <img src="@photo" alt="@award.Title.Of(Site.Culture)" />
+                        }
+                        else
+                        {
+                            <div class="cert-plate">
+                                <span>Mahapatra Arts</span>
+                                <strong>@award.Title.Of(Site.Culture)</strong>
+                                <em>@award.Year</em>
+                            </div>
+                        }
+                    </div>
+                </li>
+            }
+        </ol>
+        <p><a class="btn btn-line" href="@Site.Href("/padma-shri")">@Site.T("padma.title")</a></p>
+    </div>
+</article>

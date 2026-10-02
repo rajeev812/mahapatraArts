@@ -1,0 +1,26 @@
+@page "/workshop-experience"
+@{
+    ViewData["Title"] = Site.T("exp.title");
+    ViewData["Description"] = Site.T("seo.experience");
+    ViewData["Path"] = "/workshop-experience";
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker">@Site.T("exp.kicker")</p>
+            <h1>@Site.T("exp.title")</h1>
+            <p class="lede">@Site.T("exp.lede")</p>
+            <p class="hint">@Site.T("exp.drag")</p>
+        </div>
+    </header>
+    <div class="panorama" id="panorama" tabindex="0">
+        @foreach (var station in Catalog.Stations)
+        {
+            <article class="station glass plate-@station.Motif" id="station-@station.Id">
+                <svg viewBox="0 0 160 200" aria-hidden="true"><use href="#motif-@station.Motif" /></svg>
+                <h2>@station.Title.Of(Site.Culture)</h2>
+                <p>@station.Body.Of(Site.Culture)</p>
+            </article>
+        }
+    </div>
+</article>

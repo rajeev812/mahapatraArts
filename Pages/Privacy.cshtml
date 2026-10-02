@@ -1,0 +1,17 @@
+@page "/privacy"
+@{
+    ViewData["Title"] = Site.T("privacy.title");
+    ViewData["Description"] = Site.T("seo.privacy");
+    ViewData["Path"] = "/privacy";
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker">Mahapatra Arts</p>
+            <h1>@Site.T("privacy.title")</h1>
+        </div>
+    </header>
+    <div class="wrap prose">
+        <p>@Site.T("privacy.body")</p>
+    </div>
+</article>

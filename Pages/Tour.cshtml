@@ -1,0 +1,39 @@
+@page "/virtual-museum"
+@{
+    ViewData["Title"] = Site.T("tour.title");
+    ViewData["Description"] = Site.T("seo.tour");
+    ViewData["Path"] = "/virtual-museum";
+    var index = 1;
+}
+<article class="page tour">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker">@Site.T("tour.kicker")</p>
+            <h1>@Site.T("tour.title")</h1>
+            <p class="lede">@Site.T("tour.lede")</p>
+        </div>
+    </header>
+    <nav class="room-nav glass" aria-label="@Site.T("tour.room")">
+        @{ var n = 1; }
+        @foreach (var room in Catalog.Rooms)
+        {
+            <a href="#room-@room.Id">@n.ToString("00") @room.Title.Of(Site.Culture)</a>
+            n++;
+        }
+    </nav>
+    @foreach (var room in Catalog.Rooms)
+    {
+        <section class="room" id="room-@room.Id">
+            <div class="wrap split">
+                @await Html.PartialAsync("_Plate", new PlateView("tour/" + room.Id, room.Motif, room.Title.Of(Site.Culture), "tall"))
+                <div class="prose on-dark-text">
+                    <p class="kicker">@Site.T("tour.room") @index.ToString("00")</p>
+                    <h2>@room.Title.Of(Site.Culture)</h2>
+                    <p>@room.Body.Of(Site.Culture)</p>
+                    <a class="btn btn-line" href="@Site.Href(room.Href)">@Site.T("view")</a>
+                </div>
+            </div>
+        </section>
+        index++;
+    }
+</article>

@@ -1,0 +1,18 @@
+@page "/not-found"
+@model NotFoundModel
+@{
+    ViewData["Title"] = Site.T("nf.title");
+    ViewData["Description"] = Site.T("nf.body");
+    ViewData["Path"] = "/not-found";
+    ViewData["NoIndex"] = true;
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker">404</p>
+            <h1>@Site.T("nf.title")</h1>
+            <p class="lede">@Site.T("nf.body")</p>
+            <a class="btn btn-gold" href="@Site.Href("/")">@Site.T("nav.home")</a>
+        </div>
+    </header>
+</article>

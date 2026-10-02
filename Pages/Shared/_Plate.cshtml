@@ -1,0 +1,17 @@
+@model PlateView
+@{
+    var photo = Media.Find(Model.Slot);
+    var motif = string.IsNullOrWhiteSpace(Model.Motif) ? "lotus" : Model.Motif;
+}
+<div class="plate plate-@motif frame-@Model.Frame @(photo is null ? "is-engraved" : "has-photo")">
+    @if (photo is not null)
+    {
+        <img src="@photo" alt="@Model.Alt" />
+    }
+    else
+    {
+        <div class="plate-stone" aria-hidden="true">
+            <svg viewBox="0 0 160 200"><use href="#motif-@motif" /></svg>
+        </div>
+    }
+</div>

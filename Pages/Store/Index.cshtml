@@ -1,0 +1,58 @@
+@page "/store"
+@{
+    ViewData["Title"] = Site.T("store.title");
+    ViewData["Description"] = Site.T("seo.store");
+    ViewData["Path"] = "/store";
+    var kind = ViewContext.HttpContext.Request.Query["kind"].ToString();
+    var products = Catalog.FilterProducts(kind);
+    var wa = Site.WhatsAppHref(Site.T("store.title"));
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker">@Site.T("store.kicker")</p>
+            <h1>@Site.T("store.title")</h1>
+            <p class="lede">@Site.T("store.lede")</p>
+        </div>
+    </header>
+    <div class="wrap assurances">
+        <article class="glass"><h2>@Site.T("store.secure")</h2><p>@Site.T("store.secure.body")</p></article>
+        <article class="glass"><h2>@Site.T("store.ship")</h2><p>@Site.T("store.ship.body")</p></article>
+        <article class="glass">
+            <h2>@Site.T("store.custom")</h2>
+            <p>@Site.T("price.note")</p>
+            @if (wa is not null)
+            {
+                <a class="btn btn-line" href="@wa">@Site.T("store.wa")</a>
+            }
+            else
+            {
+                <a class="btn btn-line" href="@Site.Href("/store/quotation")">@Site.T("quote.title")</a>
+            }
+        </article>
+    </div>
+    <div class="wrap">
+        <div class="filters">
+            <a class="@(string.IsNullOrEmpty(kind) ? "is-on" : null)" href="@Site.Href("/store")">@Site.T("filter.all")</a>
+            @foreach (var category in Catalog.ProductCategories)
+            {
+                <a class="@(kind == category ? "is-on" : null)" href="@Site.Href("/store")?kind=@category">@Site.T("pcat." + category)</a>
+            }
+        </div>
+        <div class="product-grid">
+            @foreach (var product in products)
+            {
+                <article class="card glass">
+                    <a href="@Site.Href("/store/" + product.Slug)">
+                        @await Html.PartialAsync("_Plate", new PlateView("products/" + product.Slug, product.Motif, product.Title.Of(Site.Culture)))
+                        <div class="card-body">
+                            <p class="kicker">@Site.T("pcat." + product.Category)</p>
+                            <h2>@product.Title.Of(Site.Culture)</h2>
+                            <p>@Site.Format(product.GuidePriceInr)</p>
+                        </div>
+                    </a>
+                </article>
+            }
+        </div>
+    </div>
+</article>

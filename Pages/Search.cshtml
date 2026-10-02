@@ -1,0 +1,48 @@
+@page "/search"
+@model SearchModel
+@{
+    ViewData["Title"] = Site.T("search.title");
+    ViewData["Description"] = Site.T("seo.search");
+    ViewData["Path"] = "/search";
+    ViewData["NoIndex"] = true;
+    var groups = Model.Hits.GroupBy(hit => hit.Kind);
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker">@Site.T("search.kicker")</p>
+            <h1>@Site.T("search.title")</h1>
+            <p class="lede">@Site.T("search.lede")</p>
+            <form class="search-bar glass" action="@Site.Href("/search")" method="get" role="search">
+                <label class="sr" for="q">@Site.T("search.submit")</label>
+                <input id="q" name="q" value="@Model.Q" placeholder="@Site.T("search.placeholder")" />
+                <button class="btn btn-gold" type="submit">@Site.T("search.submit")</button>
+            </form>
+            @if (Model.Terms.Count > 0)
+            {
+                <p class="terms">@Site.T("search.interpreted"): @string.Join(" · ", Model.Terms)</p>
+            }
+        </div>
+    </header>
+    <div class="wrap">
+        @if (!string.IsNullOrWhiteSpace(Model.Q) && Model.Hits.Count == 0)
+        {
+            <p class="lede">@Site.T("search.empty")</p>
+        }
+        @foreach (var group in groups)
+        {
+            <h2>@Site.T("search." + group.Key)</h2>
+            <ul class="results">
+                @foreach (var hit in group)
+                {
+                    <li class="glass">
+                        <a href="@Site.Href(hit.Path.Split('#')[0])@(hit.Path.Contains('#') ? "#" + hit.Path.Split('#')[1] : "")">
+                            <strong>@hit.Title</strong>
+                            <span>@hit.Excerpt</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</article>

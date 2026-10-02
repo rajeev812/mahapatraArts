@@ -1,0 +1,43 @@
+@page "/masterpieces"
+@{
+    ViewData["Title"] = Site.T("gal.title");
+    ViewData["Description"] = Site.T("seo.gallery");
+    ViewData["Path"] = "/masterpieces";
+    var kind = ViewContext.HttpContext.Request.Query["kind"].ToString();
+    var works = Catalog.FilterWorks(kind);
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker">@Site.T("gal.kicker")</p>
+            <h1>@Site.T("gal.title")</h1>
+            <p class="lede">@Site.T("gal.lede")</p>
+        </div>
+    </header>
+    <div class="wrap">
+        <div class="filters" role="navigation" aria-label="@Site.T("filter.all")">
+            <a class="@(string.IsNullOrEmpty(kind) ? "is-on" : null)" href="@Site.Href("/masterpieces")">@Site.T("filter.all")</a>
+            @foreach (var category in Catalog.WorkCategories)
+            {
+                <a class="@(kind == category ? "is-on" : null)" href="@Site.Href("/masterpieces")?kind=@category">@Site.T("cat." + category)</a>
+            }
+        </div>
+        <div class="masonry">
+            @foreach (var work in works)
+            {
+                var title = work.Title.Of(Site.Culture);
+                <article class="card glass">
+                    <a href="@Site.Href("/masterpieces/" + work.Slug)">
+                        @await Html.PartialAsync("_Plate", new PlateView("works/" + work.Slug, work.Motif, title, work.Frame))
+                    </a>
+                    <div class="card-body">
+                        <p class="kicker">@Site.T("cat." + work.Category)</p>
+                        <h2><a href="@Site.Href("/masterpieces/" + work.Slug)">@title</a></h2>
+                        <p>@work.Location.Of(Site.Culture)</p>
+                        <button type="button" class="text-btn" data-zoom data-title="@title">@Site.T("enlarge")</button>
+                    </div>
+                </article>
+            }
+        </div>
+    </div>
+</article>

@@ -1,0 +1,25 @@
+@page "/media"
+@{
+    ViewData["Title"] = Site.T("media.title");
+    ViewData["Description"] = Site.T("seo.media");
+    ViewData["Path"] = "/media";
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker">@Site.T("media.kicker")</p>
+            <h1>@Site.T("media.title")</h1>
+            <p class="lede">@Site.T("media.lede")</p>
+        </div>
+    </header>
+    <div class="wrap press-list">
+        @foreach (var item in Catalog.Press)
+        {
+            <article class="glass" id="@item.Id">
+                <p class="kicker">@item.Kind.Of(Site.Culture) · @item.Year</p>
+                <h2>@item.Title.Of(Site.Culture)</h2>
+                <p>@item.Body.Of(Site.Culture)</p>
+            </article>
+        }
+    </div>
+</article>

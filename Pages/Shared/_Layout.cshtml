@@ -1,0 +1,241 @@
+@{
+    var pageTitle = ViewData["Title"] as string ?? Site.T("site.name");
+    var description = ViewData["Description"] as string ?? Site.T("seo.home");
+    var path = ViewData["Path"] as string ?? "/";
+    var noIndex = ViewData["NoIndex"] as bool? == true;
+    var fullTitle = path == "/"
+        ? "Mahapatra Arts | Master Stone Sculptor | National Awardee"
+        : pageTitle + " — Mahapatra Arts";
+    var host = $"{Context.Request.Scheme}://{Context.Request.Host}";
+}
+<!DOCTYPE html>
+<html lang="@Site.HtmlLang">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@fullTitle</title>
+    <meta name="description" content="@description" />
+    <meta name="keywords" content="@Site.T("keywords")" />
+    <meta name="author" content="Mahapatra Handicrafts Emporium" />
+    <meta name="theme-color" content="#2a1810" />
+    @if (noIndex)
+    {
+        <meta name="robots" content="noindex, follow" />
+    }
+    else
+    {
+        <link rel="canonical" href="@(host + Site.Href(path))" />
+        @foreach (var culture in Paths.Cultures)
+        {
+            <link rel="alternate" hreflang="@culture" href="@(host + Paths.WithCulture(culture, path))" />
+        }
+        <link rel="alternate" hreflang="x-default" href="@(host + Paths.WithCulture("en", path))" />
+    }
+    <meta property="og:site_name" content="Mahapatra Arts" />
+    <meta property="og:title" content="@fullTitle" />
+    <meta property="og:description" content="@description" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="@Site.OgLocale" />
+    <meta property="og:url" content="@(host + Site.Href(path))" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Outfit:wght@300;400;500;600&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/site.css" />
+    @Html.Raw("<script type=\"application/ld+json\">" + Site.JsonLd(path, pageTitle, description) + "</script>")
+</head>
+<body>
+    <a class="skip" href="#content">@Site.T("skip")</a>
+    <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+    <header class="site-header">
+        <div class="announce">
+            <a href="@Site.Href("/padma-shri")">@Site.T("kicker.bar")</a>
+        </div>
+        <div class="nav-row">
+            <a class="brand" href="@Site.Href("/")">
+                <span class="mark" aria-hidden="true">
+                    <svg viewBox="0 0 48 48"><rect x="6" y="6" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M24 10 L28 20 H38 L30 26 L33 36 L24 30 L15 36 L18 26 L10 20 H20 Z" fill="none" stroke="currentColor" stroke-width="1.1"/></svg>
+                </span>
+                <span>
+                    <strong>@Site.T("site.name")</strong>
+                    <em>@Site.T("site.tagline")</em>
+                </span>
+            </a>
+            <nav class="primary-nav" aria-label="Primary">
+                <a href="@Site.Href("/biography")" aria-current="@(Site.IsCurrent("/biography") ? "page" : null)">@Site.T("nav.biography")</a>
+                <a href="@Site.Href("/masterpieces")" aria-current="@(Site.IsCurrent("/masterpieces") ? "page" : null)">@Site.T("nav.masterpieces")</a>
+                <a href="@Site.Href("/global-projects")" aria-current="@(Site.IsCurrent("/global-projects") ? "page" : null)">@Site.T("nav.projects")</a>
+                <a href="@Site.Href("/academy")" aria-current="@(Site.IsCurrent("/academy") ? "page" : null)">@Site.T("nav.academy")</a>
+                <a href="@Site.Href("/store")" aria-current="@(Site.IsCurrent("/store") ? "page" : null)">@Site.T("nav.store")</a>
+            </nav>
+            <div class="nav-tools">
+                <form class="nav-search" action="@Site.Href("/search")" method="get" role="search">
+                    <label class="sr" for="q-nav">@Site.T("nav.search")</label>
+                    <input id="q-nav" name="q" placeholder="@Site.T("nav.search")" />
+                </form>
+                <details class="pop glass">
+                    <summary>@Site.Currency</summary>
+                    <ul>
+                        @foreach (var code in Money.Codes)
+                        {
+                            <li><a href="@Site.CurrencyLink(code)" aria-current="@(code == Site.Currency ? "true" : null)">@code</a></li>
+                        }
+                    </ul>
+                </details>
+                <nav class="langs" aria-label="Language">
+                    @foreach (var culture in Paths.Cultures)
+                    {
+                        <a href="@Site.Switch(culture)" hreflang="@culture" aria-current="@(culture == Site.Culture ? "true" : null)">@culture</a>
+                    }
+                </nav>
+                <a class="btn btn-line btn-line-light enquire" href="@Site.Href("/contact")">@Site.T("nav.enquire")</a>
+                <button class="btn btn-glass menu-btn" type="button" id="open-index" aria-haspopup="dialog">@Site.T("nav.index")</button>
+            </div>
+        </div>
+    </header>
+    <main id="content" tabindex="-1">
+        @RenderBody()
+    </main>
+    <footer class="site-footer">
+        <div class="wrap footer-grid">
+            <div>
+                <p class="brand-foot">Mahapatra Arts</p>
+                <p>@Site.T("footer.colophon")</p>
+            </div>
+            <div>
+                <p class="kicker">@Site.T("nav.visit")</p>
+                <a href="@Site.Href("/biography")">@Site.T("nav.biography")</a>
+                <a href="@Site.Href("/timeline")">@Site.T("nav.timeline")</a>
+                <a href="@Site.Href("/awards")">@Site.T("nav.awards")</a>
+                <a href="@Site.Href("/padma-shri")">@Site.T("nav.padma")</a>
+                <a href="@Site.Href("/media")">@Site.T("nav.media")</a>
+            </div>
+            <div>
+                <p class="kicker">@Site.T("nav.collection")</p>
+                <a href="@Site.Href("/masterpieces")">@Site.T("nav.masterpieces")</a>
+                <a href="@Site.Href("/global-projects")">@Site.T("nav.projects")</a>
+                <a href="@Site.Href("/virtual-museum")">@Site.T("nav.tour")</a>
+                <a href="@Site.Href("/store")">@Site.T("nav.store")</a>
+                <a href="@Site.Href("/search")">@Site.T("nav.search")</a>
+            </div>
+            <div>
+                <p class="kicker">@Site.T("nav.learn")</p>
+                <a href="@Site.Href("/academy")">@Site.T("nav.academy")</a>
+                <a href="@Site.Href("/workshops")">@Site.T("nav.workshops")</a>
+                <a href="@Site.Href("/workshop-experience")">@Site.T("nav.experience")</a>
+                <a href="@Site.Href("/donate")">@Site.T("nav.donate")</a>
+                <a href="@Site.Href("/contact")">@Site.T("nav.contact")</a>
+                <a href="@Site.Href("/privacy")">@Site.T("footer.privacy")</a>
+            </div>
+        </div>
+        <div class="wrap footer-end">
+            <span>© @DateTime.UtcNow.Year @Site.T("footer.rights")</span>
+            <span>Bhubaneswar · Puri · Odisha</span>
+        </div>
+    </footer>
+
+    <dialog id="index" class="index-dialog glass-dark">
+        <div class="index-head">
+            <p class="kicker">@Site.T("nav.index")</p>
+            <button type="button" class="btn btn-glass" id="close-index">@Site.T("nav.close")</button>
+        </div>
+        <div class="index-grid">
+            <div>
+                <p class="kicker">@Site.T("nav.visit")</p>
+                <a href="@Site.Href("/biography")">@Site.T("nav.biography")</a>
+                <a href="@Site.Href("/timeline")">@Site.T("nav.timeline")</a>
+                <a href="@Site.Href("/awards")">@Site.T("nav.awards")</a>
+                <a href="@Site.Href("/padma-shri")">@Site.T("nav.padma")</a>
+                <a href="@Site.Href("/media")">@Site.T("nav.media")</a>
+            </div>
+            <div>
+                <p class="kicker">@Site.T("nav.collection")</p>
+                <a href="@Site.Href("/masterpieces")">@Site.T("nav.masterpieces")</a>
+                <a href="@Site.Href("/global-projects")">@Site.T("nav.projects")</a>
+                <a href="@Site.Href("/virtual-museum")">@Site.T("nav.tour")</a>
+                <a href="@Site.Href("/store")">@Site.T("nav.store")</a>
+                <a href="@Site.Href("/store/cart")">@Site.T("nav.cart")</a>
+            </div>
+            <div>
+                <p class="kicker">@Site.T("nav.learn")</p>
+                <a href="@Site.Href("/academy")">@Site.T("nav.academy")</a>
+                <a href="@Site.Href("/workshops")">@Site.T("nav.workshops")</a>
+                <a href="@Site.Href("/workshop-experience")">@Site.T("nav.experience")</a>
+            </div>
+            <div>
+                <p class="kicker">@Site.T("nav.patron")</p>
+                <a href="@Site.Href("/donate")">@Site.T("nav.donate")</a>
+                <a href="@Site.Href("/contact")">@Site.T("nav.contact")</a>
+                <a href="@Site.Href("/store/quotation")">@Site.T("quote.title")</a>
+                <a href="@Site.Href("/search")">@Site.T("nav.search")</a>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog id="zoom" class="zoom-dialog glass-dark">
+        <div class="index-head">
+            <h2 id="zoom-title"></h2>
+            <button type="button" class="btn btn-glass" id="close-zoom">@Site.T("dialog.close")</button>
+        </div>
+        <div class="zoom-body"></div>
+    </dialog>
+
+    <svg class="sprite" aria-hidden="true">
+        <symbol id="motif-lotus" viewBox="0 0 160 200">
+            <path d="M80 168c0 0-36-42-24-78 8-24 24-40 24-40s16 16 24 40c12 36-24 78-24 78z" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <path d="M80 150c-18-8-40-6-52 10 18-2 34 6 52 16 18-10 34-18 52-16-12-16-34-18-52-10z" fill="none" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M80 132c-10-20-8-44 0-62 8 18 10 42 0 62z" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        </symbol>
+        <symbol id="motif-wheel" viewBox="0 0 160 200">
+            <circle cx="80" cy="100" r="46" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <circle cx="80" cy="100" r="8" fill="none" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M80 54v92M34 100h92M48 68l64 64M112 68L48 132" fill="none" stroke="currentColor" stroke-width="1"/>
+        </symbol>
+        <symbol id="motif-pillar" viewBox="0 0 160 200">
+            <path d="M58 46h44l8 18H50l8-18z" fill="none" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M64 64h32v96H64z" fill="none" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M52 160h56v12H52z" fill="none" stroke="currentColor" stroke-width="1.3"/>
+            <circle cx="80" cy="36" r="10" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        </symbol>
+        <symbol id="motif-temple" viewBox="0 0 160 200">
+            <path d="M80 28l34 48H46L80 28z" fill="none" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M52 76h56v78H52z" fill="none" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M70 154V110h20v44" fill="none" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M40 154h80" fill="none" stroke="currentColor" stroke-width="1.3"/>
+        </symbol>
+        <symbol id="motif-gate" viewBox="0 0 160 200">
+            <path d="M36 168V78h88v90" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <path d="M36 78c18-28 70-28 88 0" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <path d="M70 168V108h20v60" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        </symbol>
+        <symbol id="motif-kalasha" viewBox="0 0 160 200">
+            <path d="M70 40h20l6 16H64l6-16z" fill="none" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M58 56h44c8 24 8 48 0 78H58c-8-30-8-54 0-78z" fill="none" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M52 134h56v14H52z" fill="none" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M80 148v20" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        </symbol>
+        <symbol id="motif-conch" viewBox="0 0 160 200">
+            <path d="M48 120c8-40 40-62 64-40 10 10 8 28-6 40-20 18-48 22-58 0z" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <path d="M78 86c10 8 14 24 6 36" fill="none" stroke="currentColor" stroke-width="1.1"/>
+        </symbol>
+        <symbol id="motif-peacock" viewBox="0 0 160 200">
+            <path d="M80 150c-30-10-48-48-36-84 20 8 36 28 36 52 0-24 16-44 36-52 12 36-6 74-36 84z" fill="none" stroke="currentColor" stroke-width="1.3"/>
+            <circle cx="80" cy="78" r="6" fill="none" stroke="currentColor" stroke-width="1.1"/>
+            <path d="M80 150v22" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        </symbol>
+        <symbol id="motif-murti" viewBox="0 0 160 200">
+            <circle cx="80" cy="58" r="16" fill="none" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M58 92c6-16 38-16 44 0l10 70H48l10-70z" fill="none" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M62 118h36" fill="none" stroke="currentColor" stroke-width="1"/>
+        </symbol>
+        <symbol id="motif-frieze" viewBox="0 0 160 200">
+            <path d="M24 70h112v60H24z" fill="none" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M40 100c8-14 16-14 24 0s16 14 24 0 16-14 24 0 16 14 24 0" fill="none" stroke="currentColor" stroke-width="1.1"/>
+            <path d="M24 86h112M24 114h112" fill="none" stroke="currentColor" stroke-width="0.8"/>
+        </symbol>
+    </svg>
+    <script src="/js/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+@page "/donate"
+@model DonateModel
+@{
+    ViewData["Title"] = Site.T("donate.title");
+    ViewData["Description"] = Site.T("seo.donate");
+    ViewData["Path"] = "/donate";
+    ViewData["Form"] = Model.Form;
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker">@Site.T("donate.kicker")</p>
+            <h1>@Site.T("donate.title")</h1>
+            <p class="lede">@Site.T("donate.lede")</p>
+        </div>
+    </header>
+    <div class="wrap">
+        <div class="pillars">
+            <article class="glass">
+                <p class="num">@Site.Format(11000)</p>
+                <h3>@Site.T("donate.tier1")</h3>
+                <p>@Site.T("donate.tier1.b")</p>
+                <button class="text-btn" type="button" data-fill="11000">@Site.T("donate.pledge")</button>
+            </article>
+            <article class="glass">
+                <p class="num">@Site.Format(51000)</p>
+                <h3>@Site.T("donate.tier2")</h3>
+                <p>@Site.T("donate.tier2.b")</p>
+                <button class="text-btn" type="button" data-fill="51000">@Site.T("donate.pledge")</button>
+            </article>
+            <article class="glass">
+                <p class="num">@Site.Format(100000)</p>
+                <h3>@Site.T("donate.tier3")</h3>
+                <p>@Site.T("donate.tier3.b")</p>
+                <button class="text-btn" type="button" data-fill="100000">@Site.T("donate.pledge")</button>
+            </article>
+        </div>
+        @await Html.PartialAsync("_Form", new FormSpec
+        {
+            Action = Site.Href("/donate"),
+            SubmitKey = "donate.pledge",
+            ShowAmount = true
+        })
+    </div>
+</article>

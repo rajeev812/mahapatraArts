@@ -1,0 +1,48 @@
+@page "/masterpieces/{slug}"
+@model WorkModel
+@{
+    var item = Model.Item!;
+    var title = item.Title.Of(Site.Culture);
+    ViewData["Title"] = title;
+    ViewData["Description"] = item.Story.Of(Site.Culture);
+    ViewData["Path"] = "/masterpieces/" + item.Slug;
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker"><a href="@Site.Href("/masterpieces")">@Site.T("gal.title")</a> · @Site.T("cat." + item.Category)</p>
+            <h1>@title</h1>
+        </div>
+    </header>
+    <div class="wrap detail">
+        <div>
+            @await Html.PartialAsync("_Plate", new PlateView("works/" + item.Slug, item.Motif, title, "tall"))
+            <button type="button" class="text-btn" data-zoom data-title="@title">@Site.T("enlarge")</button>
+        </div>
+        <div class="prose">
+            <dl class="facts glass">
+                <dt>@Site.T("year")</dt><dd>@item.Year</dd>
+                <dt>@Site.T("stone")</dt><dd>@item.Stone</dd>
+                <dt>@Site.T("materials")</dt><dd>@item.Materials.Of(Site.Culture)</dd>
+                <dt>@Site.T("dimensions")</dt><dd>@item.Dimensions.Of(Site.Culture)</dd>
+                <dt>@Site.T("location")</dt><dd>@item.Location.Of(Site.Culture)</dd>
+            </dl>
+            <h2>@Site.T("story")</h2>
+            <p>@item.Story.Of(Site.Culture)</p>
+        </div>
+    </div>
+    <div class="wrap">
+        <h2>@Site.T("related")</h2>
+        <div class="product-grid">
+            @foreach (var work in Model.Related)
+            {
+                <article class="card glass">
+                    <a href="@Site.Href("/masterpieces/" + work.Slug)">
+                        @await Html.PartialAsync("_Plate", new PlateView("works/" + work.Slug, work.Motif, work.Title.Of(Site.Culture)))
+                        <div class="card-body"><h3>@work.Title.Of(Site.Culture)</h3></div>
+                    </a>
+                </article>
+            }
+        </div>
+    </div>
+</article>

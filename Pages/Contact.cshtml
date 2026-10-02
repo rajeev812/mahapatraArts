@@ -1,0 +1,62 @@
+@page "/contact"
+@model ContactModel
+@{
+    ViewData["Title"] = Site.T("contact.title");
+    ViewData["Description"] = Site.T("seo.contact");
+    ViewData["Path"] = "/contact";
+    ViewData["Form"] = Model.Form;
+    var phone = Site.Options.Phone;
+    var email = Site.Options.Email;
+    var wa = Site.WhatsAppHref("Mahapatra Arts");
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker">@Site.T("contact.kicker")</p>
+            <h1>@Site.T("contact.title")</h1>
+            <p class="lede">@Site.T("contact.lede")</p>
+        </div>
+    </header>
+    <div class="wrap split">
+        <div>
+            <dl class="facts glass">
+                <dt>@Site.T("contact.address")</dt>
+                <dd>@Site.Options.Address</dd>
+                <dt>@Site.T("contact.phone")</dt>
+                <dd>@(string.IsNullOrWhiteSpace(phone) ? Site.T("contact.absent") : phone)</dd>
+                <dt>@Site.T("contact.email")</dt>
+                <dd>
+                    @if (string.IsNullOrWhiteSpace(email))
+                    {
+                        @Site.T("contact.absent")
+                    }
+                    else
+                    {
+                        <a href="mailto:@email">@email</a>
+                    }
+                </dd>
+                <dt>@Site.T("contact.whatsapp")</dt>
+                <dd>
+                    @if (wa is null)
+                    {
+                        @Site.T("contact.absent")
+                    }
+                    else
+                    {
+                        <a href="@wa">WhatsApp</a>
+                    }
+                </dd>
+            </dl>
+            <div class="map-frame glass">
+                <iframe title="@Site.T("contact.map")" src="@Site.MapEmbed()" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <a href="@Site.MapLink()">@Site.T("contact.openmap")</a>
+            </div>
+        </div>
+        @await Html.PartialAsync("_Form", new FormSpec
+        {
+            Action = Site.Href("/contact"),
+            SubmitKey = "form.submit",
+            ShowTopic = true
+        })
+    </div>
+</article>

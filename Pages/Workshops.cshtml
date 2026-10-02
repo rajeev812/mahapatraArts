@@ -1,0 +1,39 @@
+@page "/workshops"
+@model WorkshopsModel
+@{
+    ViewData["Title"] = Site.T("work.title");
+    ViewData["Description"] = Site.T("seo.workshops");
+    ViewData["Path"] = "/workshops";
+    ViewData["Form"] = Model.Form;
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker">@Site.T("work.kicker")</p>
+            <h1>@Site.T("work.title")</h1>
+            <p class="lede">@Site.T("work.lede")</p>
+        </div>
+    </header>
+    <div class="wrap">
+        <ul class="feature-row">
+            <li class="glass">@Site.T("aud.architects")</li>
+            <li class="glass">@Site.T("aud.collectors")</li>
+            <li class="glass">@Site.T("aud.tourists")</li>
+            <li class="glass">@Site.T("aud.curators")</li>
+            <li class="glass">@Site.T("aud.students")</li>
+        </ul>
+        <div class="course-grid">
+            <article class="glass"><h3>@Site.T("opt.private")</h3><p>@Site.T("home.pillar3.body")</p></article>
+            <article class="glass"><h3>@Site.T("opt.group")</h3><p>@Site.T("feat.hands")</p></article>
+            <article class="glass"><h3>@Site.T("opt.tour")</h3><p>@Site.T("feat.tours")</p></article>
+            <article class="glass"><h3>@Site.T("opt.residency")</h3><p>@Site.T("feat.design")</p></article>
+        </div>
+        <h2>@Site.T("work.book")</h2>
+        @await Html.PartialAsync("_Form", new FormSpec
+        {
+            Action = Site.Href("/workshops"),
+            SubmitKey = "work.book",
+            ShowOption = true
+        })
+    </div>
+</article>

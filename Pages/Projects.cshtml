@@ -1,0 +1,70 @@
+@page "/global-projects"
+@{
+    ViewData["Title"] = Site.T("map.title");
+    ViewData["Description"] = Site.T("seo.projects");
+    ViewData["Path"] = "/global-projects";
+    var places = Catalog.Destinations;
+}
+<article class="page">
+    <header class="page-hero">
+        <div class="wrap">
+            <p class="kicker">@Site.T("map.kicker")</p>
+            <h1>@Site.T("map.title")</h1>
+            <p class="lede">@Site.T("map.lede")</p>
+        </div>
+    </header>
+    <div class="wrap atlas">
+        @foreach (var place in places)
+        {
+            if (place.Id == "india")
+            {
+                <input type="radio" name="place" id="loc-@place.Id" checked />
+            }
+            else
+            {
+                <input type="radio" name="place" id="loc-@place.Id" />
+            }
+        }
+        <div class="map glass-dark" aria-hidden="true">
+            <div class="graticule"></div>
+            @foreach (var place in places)
+            {
+                <label for="loc-@place.Id" class="pin pin-@place.Id" style="left:@place.X.ToString(CultureInfo.InvariantCulture)%;top:@place.Y.ToString(CultureInfo.InvariantCulture)%">@place.Country.Of(Site.Culture)</label>
+            }
+        </div>
+        <div class="place-list" role="list">
+            <p class="kicker">@Site.T("map.select")</p>
+            @foreach (var place in places)
+            {
+                <label for="loc-@place.Id">@place.Country.Of(Site.Culture)</label>
+            }
+        </div>
+        <div class="dossiers">
+            @foreach (var place in places)
+            {
+                <article class="dossier dossier-@place.Id glass" id="@place.Id">
+                    <h2>@place.Country.Of(Site.Culture)</h2>
+                    @foreach (var project in place.Projects)
+                    {
+                        var photo = Media.Find("projects/" + project.Slug);
+                        <section class="project-block">
+                            @if (photo is not null)
+                            {
+                                <img src="@photo" alt="@project.Title.Of(Site.Culture)" />
+                            }
+                            else
+                            {
+                                @await Html.PartialAsync("_Plate", new PlateView("projects/" + project.Slug, project.Motif, project.Title.Of(Site.Culture), "wide"))
+                            }
+                            <div>
+                                <p class="kicker">@project.Year</p>
+                                <h3>@project.Title.Of(Site.Culture)</h3>
+                                <p>@project.History.Of(Site.Culture)</p>
+                            </div>
+                        </section>
+                    }
+                </article>
+            }
+        </div>
+    </div>
+</article>
