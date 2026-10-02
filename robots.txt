@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+Disallow: /mahapatraArts/store/cart
+Disallow: /mahapatraArts/store/quotation
+Disallow: /mahapatraArts/search
+Disallow: /mahapatraArts/fr/store/cart
+Disallow: /mahapatraArts/de/store/cart
+Disallow: /mahapatraArts/ja/store/cart
+Disallow: /mahapatraArts/fr/store/quotation
+Disallow: /mahapatraArts/de/store/quotation
+Disallow: /mahapatraArts/ja/store/quotation
+Disallow: /mahapatraArts/fr/search
+Disallow: /mahapatraArts/de/search
+Disallow: /mahapatraArts/ja/search
+
+Sitemap: https://rajeev812.github.io/mahapatraArts/sitemap.xml
