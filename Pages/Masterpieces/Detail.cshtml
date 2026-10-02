@@ -18,6 +18,18 @@
         <div>
             @await Html.PartialAsync("_Plate", new PlateView("works/" + item.Slug, item.Motif, title, "tall"))
             <button type="button" class="text-btn" data-zoom data-title="@title">@Site.T("enlarge")</button>
+            @{
+                var frames = Media.Gallery("works/" + item.Slug);
+            }
+            @if (frames.Count > 1)
+            {
+                <div class="filmstrip">
+                    @foreach (var frame in frames.Skip(1))
+                    {
+                        <img src="@frame" alt="@title" />
+                    }
+                </div>
+            }
         </div>
         <div class="prose">
             <dl class="facts glass">

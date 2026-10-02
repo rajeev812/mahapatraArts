@@ -9,7 +9,7 @@ public sealed class SiteOptions
     public string Phone { get; set; } = "";
     public string Email { get; set; } = "";
     public string WhatsApp { get; set; } = "";
-    public string Address { get; set; } = "Mahapatra Handicrafts Emporium, Bhubaneswar, Odisha, India";
+    public string Address { get; set; } = "Kharakhia Baidyanath Lane, Plot No. 1359, Old Town, Bhubaneswar, Odisha 751002, India";
     public string PaymentUrl { get; set; } = "";
     public double MapLat { get; set; } = 20.2961;
     public double MapLng { get; set; } = 85.8245;

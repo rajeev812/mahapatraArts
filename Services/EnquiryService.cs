@@ -109,6 +109,22 @@ public sealed class MediaLibrary(IWebHostEnvironment environment)
         return null;
     }
 
+    public IReadOnlyList<string> Gallery(string slot)
+    {
+        var found = new List<string>();
+        var first = Find(slot);
+        if (first is not null)
+            found.Add(first);
+        for (var i = 2; i <= 12; i++)
+        {
+            var next = Find(slot + "-" + i);
+            if (next is null)
+                break;
+            found.Add(next);
+        }
+        return found;
+    }
+
     public string? Video(string slot)
     {
         foreach (var extension in new[] { ".mp4", ".webm" })

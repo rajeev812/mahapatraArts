@@ -46,11 +46,21 @@
                     <h2>@place.Country.Of(Site.Culture)</h2>
                     @foreach (var project in place.Projects)
                     {
-                        var photo = Media.Find("projects/" + project.Slug);
+                        var frames = Media.Gallery("projects/" + project.Slug);
+                        var photo = frames.FirstOrDefault();
                         <section class="project-block">
                             @if (photo is not null)
                             {
                                 <img src="@photo" alt="@project.Title.Of(Site.Culture)" />
+                                @if (frames.Count > 1)
+                                {
+                                    <div class="filmstrip">
+                                        @foreach (var frame in frames.Skip(1))
+                                        {
+                                            <img src="@frame" alt="@project.Title.Of(Site.Culture)" />
+                                        }
+                                    </div>
+                                }
                             }
                             else
                             {

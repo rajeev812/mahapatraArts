@@ -49,9 +49,9 @@ Settlement of a sculpture is by proforma invoice and the emporium’s own paymen
 
 ## Photographs
 
-Studio plates are already in `wwwroot/media/` so the published site shows stone, the yard, and the works. They are original studies for the site, not archive photographs of the installed sculptures. Drop a `.jpg`, `.jpeg`, `.png`, `.webp`, or `.avif` on the same slot and the page uses the new file. No code change.
+Archive photographs from the atelier now fill the named works: the Nataraja patchwork, Ganapati, the onyx Ganesha, the Dasa Avatar, the Buddhas, the Delhi gate, Jaypee University, Prashanti Nilayam, and the ongoing temples. `wwwroot/media/portraits/guru.jpg` is Guru Ramakanta carving semi-precious stone. Drop a `.jpg`, `.jpeg`, `.png`, `.webp`, or `.avif` on the same slot and the page uses the new file.
 
-`wwwroot/media/portraits/guru.jpg` is an atelier study of hands at the stone. A portrait from the archive replaces it when you put a file on that path.
+The emporium desk is Kharakhia Baidyanath Lane, Plot No. 1359, Old Town, Bhubaneswar 751002. Phone and WhatsApp: +91 9437031861. Email: ramakanta.mahapatra01@gmail.com.
 
 | File | Where it appears |
 | --- | --- |
