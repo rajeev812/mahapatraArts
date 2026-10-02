@@ -302,7 +302,7 @@ p { margin: 0 0 1rem; }
 .when { font-family: var(--serif); font-size: 1.8rem; color: var(--gold-ink); }
 .awards li { display: grid; gap: 1rem; }
 .cert-frame { border-radius: 16px; overflow: hidden; background: #f8f1e4; color: var(--temple); min-height: 180px; }
-.cert-frame img { width: 100%; height: 220px; object-fit: cover; }
+.cert-frame img { width: 100%; height: auto; max-height: 460px; object-fit: contain; background: #f8f1e4; }
 .cert-plate { min-height: 200px; padding: 1.4rem; display: grid; align-content: space-between; background:
   linear-gradient(180deg, rgba(255,255,255,.4), transparent),
   repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(182,139,58,.15) 29px);

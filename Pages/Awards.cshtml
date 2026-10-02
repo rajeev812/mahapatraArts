@@ -16,17 +16,26 @@
         <ol class="timeline awards">
             @foreach (var award in Catalog.Awards)
             {
-                var photo = Media.Find("awards/" + award.Slug);
+                var frames = Media.Gallery("awards/" + award.Slug);
                 <li class="glass" id="@award.Slug">
                     <span class="when">@award.Year</span>
                     <div class="award-body">
                         <h2>@award.Title.Of(Site.Culture)</h2>
                         <p>@award.Body.Of(Site.Culture)</p>
+                        @if (frames.Count > 1)
+                        {
+                            <div class="filmstrip wide">
+                                @foreach (var frame in frames.Skip(1))
+                                {
+                                    <img src="@frame" alt="@award.Title.Of(Site.Culture)" />
+                                }
+                            </div>
+                        }
                     </div>
                     <div class="cert-frame">
-                        @if (photo is not null)
+                        @if (frames.Count > 0)
                         {
-                            <img src="@photo" alt="@award.Title.Of(Site.Culture)" />
+                            <img src="@frames[0]" alt="@award.Title.Of(Site.Culture)" />
                         }
                         else
                         {
