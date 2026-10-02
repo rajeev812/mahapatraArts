@@ -66,6 +66,14 @@ def rewrite(text):
 
     text = re.sub(r"(url\((?:['\"]|&#x27;|&#39;))(/[^)'\"&]+)", prefix_url, text)
     text = re.sub(r"(?m)^(Disallow: )(/.*)$", lambda m: m.group(1) + BASE + m.group(2), text)
+
+    def prefix_json(match):
+        url = match.group(2)
+        if url == BASE or url.startswith(BASE + "/"):
+            return match.group(0)
+        return match.group(1) + BASE + url + '"'
+
+    text = re.sub(r'("(?:src|start_url)"\s*:\s*")(/[^"]*)"', prefix_json, text)
     return text
 
 
@@ -93,7 +101,7 @@ def enqueue(raw, base_url):
 body, _ = fetch(ORIGIN + "/sitemap.xml")
 for loc in re.findall(r"<loc>([^<]+)</loc>", body.decode()):
     enqueue(loc, ORIGIN + "/")
-for extra in ("/css/site.css", "/js/site.js", "/favicon.svg", "/site.webmanifest", "/robots.txt", "/sitemap.xml"):
+for extra in ("/css/site.css", "/js/site.js", "/favicon.ico", "/favicon-32.png", "/favicon-192.png", "/favicon-512.png", "/apple-touch-icon.png", "/brand/logo.jpg", "/site.webmanifest", "/robots.txt", "/sitemap.xml"):
     enqueue(extra, ORIGIN + "/")
 
 while queue:

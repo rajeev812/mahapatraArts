@@ -13,7 +13,7 @@
   --muted: #5c4636;
   --serif: "Cormorant Garamond", "Noto Serif JP", Palatino, "Palatino Linotype", Georgia, serif;
   --sans: "Outfit", "Noto Sans JP", "Segoe UI", sans-serif;
-  --header: 7.4rem;
+  --header: 9.2rem;
   --shadow: 0 24px 60px rgba(36, 23, 15, .12);
 }
 
@@ -131,10 +131,7 @@ p { margin: 0 0 1rem; }
 .announce a { color: var(--gold-bright); text-decoration: none; }
 .nav-row { display: flex; align-items: center; gap: .8rem; padding: .55rem 1rem .75rem; flex-wrap: wrap; }
 .brand { display: flex; gap: .7rem; align-items: center; color: inherit; text-decoration: none; margin-right: auto; }
-.brand strong { display: block; font-family: var(--serif); font-size: 1.35rem; font-weight: 600; letter-spacing: .01em; }
-.brand em { display: block; font-style: normal; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-bright); }
-.mark { width: 36px; height: 36px; color: var(--gold-bright); }
-.mark svg { width: 100%; height: 100%; }
+.brand-logo { height: 5.6rem; width: auto; border-radius: 14px; box-shadow: 0 10px 24px rgba(0, 0, 0, .28); }
 .primary-nav { display: none; gap: 1.1rem; }
 .primary-nav a { color: var(--ivory); text-decoration: none; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; }
 .primary-nav a[aria-current="page"] { color: var(--gold-bright); }
@@ -283,7 +280,7 @@ p { margin: 0 0 1rem; }
 }
 .filters a.is-on, .place-list label:hover { background: var(--temple); color: var(--ivory); }
 
-.page-hero { padding: 9.2rem 0 3rem; background: linear-gradient(180deg, #2a1810 0%, #3c291c 62%, transparent 100%); color: var(--ivory); }
+.page-hero { padding: 10.6rem 0 3rem; background: linear-gradient(180deg, #2a1810 0%, #3c291c 62%, transparent 100%); color: var(--ivory); }
 .page-hero h1 { color: var(--ivory); font-size: clamp(3rem, 7vw, 6rem); margin: 0 0 .6rem; max-width: 14ch; }
 .page-hero .lede, .page-hero a { color: rgba(246,241,231,.84); }
 .page { padding-bottom: 4rem; }
@@ -427,7 +424,7 @@ p { margin: 0 0 1rem; }
 .site-footer { background: #24170f; color: rgba(246,241,231,.82); padding: 3rem 0 1.4rem; }
 .footer-grid { display: grid; gap: 1.5rem; }
 .footer-grid a { display: block; color: var(--ivory); text-decoration: none; padding: .15rem 0; }
-.brand-foot { font-family: var(--serif); font-size: 2rem; color: var(--ivory); margin: 0 0 .4rem; }
+.brand-foot-logo { width: 11.5rem; height: auto; border-radius: 16px; margin: 0 0 .8rem; }
 .footer-end { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; border-top: 1px solid rgba(228,199,123,.25); margin-top: 2rem; padding-top: 1rem; font-size: .85rem; }
 .site-footer .kicker { color: var(--gold-bright); }
 
@@ -475,10 +472,10 @@ p { margin: 0 0 1rem; }
   .course-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 719px) {
-  .hero { min-height: auto; padding-top: 12.5rem; }
+  .hero { min-height: auto; padding-top: 13.4rem; }
   .hero h1 { font-size: 3.15rem; max-width: none; }
   .scene-word { display: none; }
-  .hero-etch { width: 108px; top: 8.5rem; right: .6rem; }
+  .hero-etch { width: 108px; top: 9.6rem; right: .6rem; }
   .cta-row .btn { width: 100%; }
   .stats { margin-top: 1.4rem; }
 }

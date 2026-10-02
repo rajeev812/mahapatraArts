@@ -38,7 +38,9 @@
     <meta property="og:locale" content="@Site.OgLocale" />
     <meta property="og:url" content="@(host + Site.Href(path))" />
     <meta name="twitter:card" content="summary" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -55,13 +57,7 @@
         </div>
         <div class="nav-row">
             <a class="brand" href="@Site.Href("/")">
-                <span class="mark" aria-hidden="true">
-                    <svg viewBox="0 0 48 48"><rect x="6" y="6" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M24 10 L28 20 H38 L30 26 L33 36 L24 30 L15 36 L18 26 L10 20 H20 Z" fill="none" stroke="currentColor" stroke-width="1.1"/></svg>
-                </span>
-                <span>
-                    <strong>@Site.T("site.name")</strong>
-                    <em>@Site.T("site.tagline")</em>
-                </span>
+                <img class="brand-logo" src="/brand/logo.jpg" width="960" height="960" alt="Mahapatra Handicrafts Emporium, a unit of P.R Exports" />
             </a>
             <nav class="primary-nav" aria-label="Primary">
                 <a href="@Site.Href("/biography")" aria-current="@(Site.IsCurrent("/biography") ? "page" : null)">@Site.T("nav.biography")</a>
@@ -101,7 +97,7 @@
     <footer class="site-footer">
         <div class="wrap footer-grid">
             <div>
-                <p class="brand-foot">Mahapatra Arts</p>
+                <img class="brand-foot-logo" src="/brand/logo.jpg" width="960" height="960" alt="Mahapatra Handicrafts Emporium, a unit of P.R Exports" />
                 <p>@Site.T("footer.colophon")</p>
             </div>
             <div>
