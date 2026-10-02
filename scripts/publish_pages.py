@@ -57,6 +57,14 @@ def rewrite(text):
         return f"{attr}={quote}{BASE}{url}{quote}"
 
     text = re.sub(r"\b(href|src|action)=(\"|')(/[^\"']*)\2", repl, text)
+
+    def prefix_url(match):
+        url = match.group(2)
+        if url == BASE or url.startswith(BASE + "/"):
+            return match.group(0)
+        return match.group(1) + BASE + url
+
+    text = re.sub(r"(url\((?:['\"]|&#x27;|&#39;))(/[^)'\"&]+)", prefix_url, text)
     text = re.sub(r"(?m)^(Disallow: )(/.*)$", lambda m: m.group(1) + BASE + m.group(2), text)
     return text
 
@@ -112,7 +120,7 @@ while queue:
             parser.feed(text)
             for link in parser.links:
                 enqueue(link, url)
-            for link in re.findall(r"url\((?:['\"])?(/[^)'\"]+)", text):
+            for link in re.findall(r"url\((?:['\"]|&#x27;|&#39;)?(/[^)'\"&]+)", text):
                 enqueue(link, url)
         data = rewrite(text).encode("utf-8")
     with open(target, "wb") as handle:
