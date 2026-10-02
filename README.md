@@ -14,6 +14,8 @@ dotnet run --urls http://127.0.0.1:47291
 
 Open [http://127.0.0.1:47291](http://127.0.0.1:47291).
 
+The published reading copy is [https://rajeev812.github.io/mahapatraArts/](https://rajeev812.github.io/mahapatraArts/). GitHub Pages serves the pages, gallery, atlas, and academy. Enquiries, search, and the quotation cart run on the ASP.NET application above, because Pages cannot host that server. A push to `main` rebuilds the published copy.
+
 ```bash
 dotnet test tests/MahapatraArts.Tests
 ```
